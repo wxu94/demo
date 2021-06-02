@@ -3,5 +3,5 @@ kind: Namespace
 metadata:
   name: onlineboutique
   labels:
-    istio.io/rev: asm-173-6
+    istio.io/rev: asm-183-2
     managementcenter.anthos.cloud.google.com/use-private-registry: "true"
