@@ -1,0 +1,35 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: audit-non-gcr-repo
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+  parameters:
+    message: "Audit non-gcr repo."
+    repos:
+      - "gcr.io"
+      - "k8s.gcr.io"
+      - "gke.gcr.io"
+  enforcementAction: dryrun
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: deny-non-gcr-repo-for-dev
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "dev"
+  parameters:
+    message: "Deny non-gcr repo for dev."
+    repos:
+      - "gcr.io"
+      - "k8s.gcr.io"
+      - "gke.gcr.io"
+  enforcementAction: deny
